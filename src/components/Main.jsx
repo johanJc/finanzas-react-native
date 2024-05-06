@@ -1,11 +1,20 @@
 import React from "react";
 import Checkbox from 'expo-checkbox';
 import { View, Text, StyleSheet } from "react-native";
-// import CheckBox from '@react-native-community/checkbox';
-
 import Constants from 'expo-constants';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-reanimated-table';
 
 const Main = () => {
+    this.state = {
+        tableHead: ['Nombre', 'Monto', 'Pagado'],
+        tableData: [
+            ['Egreso 1', '$15.000', '3'],
+            ['Egreso 2', '$15.000', 'c'],
+            ['Egreso 3', '$15.000', '3'],
+            ['Egreso 4', '$15.000', 'c']
+        ]
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.header_amounts}>
@@ -23,17 +32,10 @@ const Main = () => {
             <View style={styles.box}>
                 <Text style={styles.title_box}>Egresos fijos</Text>
                 <View>
-                    {/* Esta es la tabla */}
-                    <View style={styles.row_justify}>
-                        <Text style={styles.header_table}>Nombre</Text>
-                        <Text style={styles.header_table}>Monto</Text>
-                        <Text style={styles.header_table}>Pagado</Text>
-                    </View>
-                    <View style={styles.row_justify}>
-                        <Text>Egreso 1</Text>
-                        <Text>$15.000</Text>
-                        <Checkbox/>
-                    </View>
+                    <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
+                        <Row data={state.tableHead} style={styles.header_table} textStyle={styles.header_table_text} />
+                        <Rows data={state.tableData} textStyle={styles.table_td} />
+                    </Table>
                 </View>
             </View>
         </View>
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
     future_amount: {
         fontSize: 20,
         color: 'red',
-        fontWeight: '600'        
+        fontWeight: '600'
     },
     text_date: {
         textAlign: 'right',
@@ -90,13 +92,19 @@ const styles = StyleSheet.create({
     },
     row_justify: {
         flexDirection: 'row',
-        justifyContent: 'space-around',        
+        justifyContent: 'space-around',
     },
     header_table: {
-        fontWeight: 'bold',
-        fontSize: 18,
-        alignSelf: 'center',
         marginTop: 10
+    },
+    header_table_text: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        alignSelf: 'center',
+    },
+    table_td: {
+        textAlign: 'center',
+        fontSize: 18
     }
 })
 
