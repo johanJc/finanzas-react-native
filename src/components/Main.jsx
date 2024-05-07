@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Checkbox from 'expo-checkbox';
 import { View, Text, StyleSheet } from "react-native";
 import Constants from 'expo-constants';
+import { useFonts } from 'expo-font';
 
 const Main = () => {
-    const data = [
+    // const [fontsLoaded] = useFonts({
+    //     Caveat: require('./assets/fonts/Caveat.ttf')
+    // });
+    const [data, setData] = useState([
         { nombre: 'Egreso 1', monto: '$15.000', pagado: false },
         { nombre: 'Egreso 2', monto: '$20.000', pagado: true },
         // Agrega más datos según necesites
-    ];
+    ]);
+
+    const handleCheckboxChange = (index) => {
+        const newData = [...data];
+        newData[index].pagado = !newData[index].pagado;
+        setData(newData);
+    }
 
     return (
         <View style={styles.container}>
@@ -36,7 +46,10 @@ const Main = () => {
                     <View style={styles.row_justify} key={index}>
                         <Text style={styles.table_td}>{item.nombre}</Text>
                         <Text style={styles.table_td}>{item.monto}</Text>
-                        <Checkbox style={{ alignSelf: 'center', justifyContent: 'center' }} value={item.pagado} />
+                        <View style={{ width: '33%', justifyContent: 'center' }}>
+                            <Checkbox value={item.pagado} style={{ alignSelf: 'center', marginTop: 5 }}
+                                onValueChange={() => handleCheckboxChange(index)} />
+                        </View>
                     </View>
                 ))}
             </View>
@@ -51,7 +64,8 @@ const styles = StyleSheet.create({
         paddingTop: 0,
         marginTop: Constants.statusBarHeight,
         flexGrow: 1,
-        gap: 10
+        gap: 10,
+        // fontFamily: 'Caveat'
     },
     header_amounts: {
         flexDirection: 'row',
@@ -94,8 +108,8 @@ const styles = StyleSheet.create({
     },
     row_justify: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        backgroundColor: '#2fa'
+        // justifyContent: 'space-around',
+        // backgroundColor: '#2fa'
     },
     header_table: {
         fontWeight: 'bold',
@@ -109,7 +123,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
         // alignSelf: 'center',
         width: '33%',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: 5
     }
 })
 
