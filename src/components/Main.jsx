@@ -3,6 +3,7 @@ import Checkbox from 'expo-checkbox';
 import { View, Text, StyleSheet } from "react-native";
 import Constants from 'expo-constants';
 import { useFonts } from 'expo-font';
+import AppBar from "./AppBar";
 
 const Main = () => {
     // const [fontsLoaded] = useFonts({
@@ -22,6 +23,7 @@ const Main = () => {
 
     return (
         <View style={styles.container}>
+            <AppBar />
             <View style={styles.header_amounts}>
                 <Text style={styles.current_value}>$950.000</Text>
                 <View style={{ textAlign: 'right' }}>
@@ -36,6 +38,26 @@ const Main = () => {
 
             <View style={styles.box}>
                 <Text style={styles.title_box}>Egresos fijos</Text>
+                <View style={styles.row_justify}>
+                    <Text style={[styles.header_table, styles.cell]}>Nombre</Text>
+                    <Text style={[styles.header_table, styles.cell]}>Monto</Text>
+                    <Text style={[styles.header_table, styles.cell]}>Pagado</Text>
+                </View>
+                {/* Renderización dinámica de filas */}
+                {data.map((item, index) => (
+                    <View style={styles.row_justify} key={index}>
+                        <Text style={styles.table_td}>{item.nombre}</Text>
+                        <Text style={styles.table_td}>{item.monto}</Text>
+                        <View style={{ width: '33%', justifyContent: 'center' }}>
+                            <Checkbox value={item.pagado} style={{ alignSelf: 'center', marginTop: 5 }}
+                                onValueChange={() => handleCheckboxChange(index)} />
+                        </View>
+                    </View>
+                ))}
+            </View>
+
+            <View style={styles.box}>
+                <Text style={styles.title_box}>Egresos ocasionales</Text>
                 <View style={styles.row_justify}>
                     <Text style={[styles.header_table, styles.cell]}>Nombre</Text>
                     <Text style={[styles.header_table, styles.cell]}>Monto</Text>

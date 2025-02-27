@@ -13,13 +13,13 @@
     "@react-native-community/checkbox": "^0.5.17",
     "expo": "~50.0.17",
     "expo-checkbox": "~2.7.0",
+    "expo-font": "~11.10.3",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.73.6",
+    "react-native": "^0.74.1",
     "react-native-reanimated-table": "^0.0.2",
-    "react-native-web": "~0.19.6",
-    "expo-font": "~11.10.3"
+    "react-native-web": "~0.19.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
